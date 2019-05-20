@@ -1,6 +1,6 @@
 package model;
 
-import java.time.LocalDateTime;
+import java.time.LocalDate;
 import java.util.EnumMap;
 import java.util.Map;
 import java.util.Objects;
@@ -11,13 +11,26 @@ public class Person {
     private String name;
     private String surname;
     private String email;
-    private LocalDateTime birthday;
+    private LocalDate birthday;
     private String phone;
 
     private Map<About, String> about = new EnumMap<>(About.class);
     private Map<Education, String> education = new EnumMap<>(Education.class);
     private Map<Other, String> other = new EnumMap<>(Other.class);
 
+
+    public Person(String id, String name, String surname, String email, LocalDate birthday) {
+        Objects.requireNonNull(id, "ID must not be null");
+        Objects.requireNonNull(name, "Name must not be null");
+        Objects.requireNonNull(name, "Surname must not be null");
+        Objects.requireNonNull(email, "Email must not be null");
+        Objects.requireNonNull(birthday, "Birthday must not be null");
+        this.id = id;
+        this.name = name;
+        this.surname = surname;
+        this.email = email;
+        this.birthday = birthday;
+    }
 
     public String getId() {
         return id;
@@ -51,11 +64,11 @@ public class Person {
         this.email = email;
     }
 
-    public LocalDateTime getBirthday() {
+    public LocalDate getBirthday() {
         return birthday;
     }
 
-    public void setBirthday(LocalDateTime birthday) {
+    public void setBirthday(LocalDate birthday) {
         this.birthday = birthday;
     }
 
@@ -71,24 +84,24 @@ public class Person {
         return about;
     }
 
-    public void setAbout(Map<About, String> about) {
-        this.about = about;
+    public void setAbout(About type, String s) {
+        about.put(type, s);
     }
 
     public Map<Education, String> getEducation() {
         return education;
     }
 
-    public void setEducation(Map<Education, String> education) {
-        this.education = education;
+    public void setEducation(Education type, String s) {
+        education.put(type, s);
     }
 
     public Map<Other, String> getOther() {
         return other;
     }
 
-    public void setOther(Map<Other, String> other) {
-        this.other = other;
+    public void setOther(Other type, String s) {
+        other.put(type, s);
     }
 
     public String getAbout(About type) {
@@ -128,15 +141,15 @@ public class Person {
     @Override
     public String toString() {
         return "Person{" +
-                "id='" + id + '\n' +
-                ", name='" + name + '\n' +
-                ", surname='" + surname + '\n' +
-                ", email='" + email + '\n' +
-                ", birthday=" + birthday +
-                ", phone='" + phone + '\n' +
-                ", about=" + about + "\n" +
-                ", education=" + education + "\n" +
-                ", other=" + other +
+                "id=" + id + "\n" +
+                "name=" + name + "\n" +
+                "surname=" + surname + "\n" +
+                "email=" + email + "\n" +
+                "birthday=" + birthday +
+                "phone=" + phone + "\n" +
+                "about=" + about + "\n" +
+                "education=" + education + "\n" +
+                "other=" + other +
                 '}' + "\n";
     }
 }
