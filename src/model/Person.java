@@ -4,6 +4,7 @@ import java.time.LocalDate;
 import java.util.EnumMap;
 import java.util.Map;
 import java.util.Objects;
+import java.util.UUID;
 
 public class Person {
 
@@ -19,8 +20,17 @@ public class Person {
     private Map<Other, String> other = new EnumMap<>(Other.class);
 
 
+    public Person() {
+        id = UUID.randomUUID().toString();
+    }
+
+    public Person(String name, String surname, String email, LocalDate birthday) {
+        this(UUID.randomUUID().toString(), name, surname, email, birthday);
+
+    }
+
     public Person(String id, String name, String surname, String email, LocalDate birthday) {
-        Objects.requireNonNull(id, "ID must not be null");
+        Objects.requireNonNull(id, "Id must not be null");
         Objects.requireNonNull(name, "Name must not be null");
         Objects.requireNonNull(name, "Surname must not be null");
         Objects.requireNonNull(email, "Email must not be null");

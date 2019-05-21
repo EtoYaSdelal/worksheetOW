@@ -14,9 +14,17 @@ import java.util.Map;
 
 public class DAO {
     private Connector connector;
+//    private String url = "jdbc:postgresql://localhost:5432/postgres";
+//    private String user = "postgres";
+//    private String pass = "admin";
 
-    public DAO(String url, String user, String pass) {
-        connector = new Connector(() -> DriverManager.getConnection(url, user, pass));
+    public DAO() {
+        try {
+            Class.forName("org.postgresql.Driver");
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        }
+        connector = new Connector(() -> DriverManager.getConnection("jdbc:postgresql://localhost:5432/postgres", "postgres", "admin"));
     }
 
     public void clear() {

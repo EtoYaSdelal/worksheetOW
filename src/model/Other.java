@@ -11,4 +11,7 @@ public enum Other {
         this.title = title;
     }
 
+    public String getTitle() {
+        return title;
+    }
 }

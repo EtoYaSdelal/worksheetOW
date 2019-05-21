@@ -4,6 +4,24 @@
          xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_4_0.xsd"
          version="4.0">
 
+    <servlet>
+        <servlet-name>AdminViewServlet</servlet-name>
+        <servlet-class>web.AdminViewServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>AdminViewServlet</servlet-name>
+        <url-pattern>/admin-view</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>AppFormServlet</servlet-name>
+        <servlet-class>web.AppFormServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>AppFormServlet</servlet-name>
+        <url-pattern>/application-form</url-pattern>
+    </servlet-mapping>
+    
 
 </web-app>
 
