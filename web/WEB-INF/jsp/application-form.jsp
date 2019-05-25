@@ -19,6 +19,7 @@
     .my-page {
         margin: 100px 150px 150px 200px;
     }
+
     .label {
         font-size: larger;
         color: rgba(0, 0, 0, 0.39);
@@ -50,25 +51,25 @@
                 </div>
             </div>
 
-            <label class="label"  for="email">E-mail *</label>
+            <label class="label" for="email">E-mail *</label>
             <input type="email" class="form-control" id="email" name="email" placeholder="email"
                    size="30">
             <div id="emailAlert" class="alert alert-danger collapse">
                 Поле обязательно для заполнения
             </div>
 
-            <label class="label"  class="label"  for="birthday">Дата рождения *</label>
+            <label class="label" class="label" for="birthday">Дата рождения *</label>
             <input class="form-control" id="birthday" name="birthday" placeholder="dd-MM-yyyy">
             <div id="birthAlert" class="alert alert-danger collapse">
                 Поле обязательно для заполнения, формат dd-MM-yyyy
             </div>
 
-            <label class="label"  for="phone">Телефон</label>
+            <label class="label" for="phone">Телефон</label>
             <input class="form-control" id="phone" name="phone" placeholder="phone" size="30">
         </div>
 
 
-        <label class="label" >Чем Вам было бы интересно заниматься? *</label>
+        <label class="label">Чем Вам было бы интересно заниматься? *</label>
         <div class="form-group questions">
             <div class="custom-control custom-checkbox">
                 <input type="checkbox" class="custom-control-input" id="1" name="1"
@@ -139,13 +140,13 @@
 
 
         <div class="form-group">
-            <label class="label"  for="comment">Ваши комментарии</label>
+            <label class="label" for="comment">Ваши комментарии</label>
             <textarea style="border-radius: 3px " itemtype="text" id="comment" rows="10" cols="140"
                       name="comment"></textarea>
         </div>
 
         <div class="form-group">
-            <label class="label"  for="skills">Расскажите о своих знаниях компьютерных технологий, прикладного ПО, языков
+            <label class="label" for="skills">Расскажите о своих знаниях компьютерных технологий, прикладного ПО, языков
                 программирования: *</label>
             <textarea style="border-radius: 3px " itemtype="text" id="skills" rows="10" cols="140"
                       name="skills"></textarea>
@@ -154,7 +155,7 @@
             </div>
         </div>
 
-        <label class="label" >Я планирую прийти на день открытых дверей и послушать презентацию Школы</label>
+        <label class="label">Я планирую прийти на день открытых дверей и послушать презентацию Школы</label>
         <div class="custom-control custom-radio">
             <input type="radio" id="openDay1" name="openDay" class="custom-control-input" value="Да">
             <label class="custom-control-label" for="openDay1">Да</label>
@@ -166,7 +167,7 @@
         </div>
 
         <div class="form-group">
-            <label class="label"  for="univ">Университет *</label>
+            <label class="label" for="univ">Университет *</label>
             <input type="text" class="form-control" id="univ" name="univ">
             <div id="univAlert" class="alert alert-danger collapse">
                 Поле обязательно для заполнения
@@ -174,7 +175,7 @@
         </div>
 
         <div class="form-group">
-            <label class="label"  for="faculty">Факультет *</label>
+            <label class="label" for="faculty">Факультет *</label>
             <input type="text" class="form-control" id="faculty" name="faculty">
             <div id="facultyAlert" class="alert alert-danger collapse">
                 Поле обязательно для заполнения
@@ -182,7 +183,7 @@
         </div>
 
         <div class="form-group">
-            <label class="label"  for="dep">Кафедра *</label>
+            <label class="label" for="dep">Кафедра *</label>
             <input type="text" class="form-control" id="dep" name="dep">
             <div id="depAlert" class="alert alert-danger collapse">
                 Поле обязательно для заполнения
@@ -190,11 +191,11 @@
         </div>
 
         <div class="form-group">
-            <label class="label"  for="year">Год поступления</label>
+            <label class="label" for="year">Год поступления</label>
             <input type="text" class="form-control" id="year" name="year">
         </div>
 
-        <label class="label" >Уровень английского языка *</label>
+        <label class="label">Уровень английского языка *</label>
         <p><select itemtype="text" name="english">
             <option>Elementary</option>
             <option>Pre-Intermediate</option>
@@ -207,12 +208,12 @@
         </div>
 
         <div class="form-group">
-            <label class="label"  for="exp">Опыт работы (если имеется)</label>
+            <label class="label" for="exp">Опыт работы (если имеется)</label>
             <textarea style="border-radius: 3px " itemtype="text" id="exp" rows="10" cols="140" name="exp"></textarea>
         </div>
 
         <div class="form-group">
-            <label class="label"  for="hearFrom"> Вы узнали о Летней школе?</label>
+            <label class="label" for="hearFrom"> Вы узнали о Летней школе?</label>
             <input type="text" class="form-control" id="hearFrom" name="hearFrom">
         </div>
 
@@ -236,80 +237,95 @@
 
 </div>
 <script>
-    $("form#myForm").submit(function (ev) {
+    $("form#myForm").on('submit',function (ev) {
 
         if ($(".questions input[type=checkbox]:checked").length === 0) {
-            $('#checkBoxAlert').show('');
+            $('#checkBoxAlert').show();
+            $('#9').trigger('focus');
             ev.preventDefault();
 
         }
 
         if ($("input[name=name]").val() === '') {
-            $('#nameAlert').show('');
+            $('#nameAlert').show();
+            $('#name').trigger('focus');
             ev.preventDefault();
         }
 
         if ($("input[name=surname]").val() === '') {
-            $('#surnameAlert').show('');
+            $('#surnameAlert').show();
+            $('#surname').trigger('focus');
             ev.preventDefault();
         }
 
         if ($("input[name=email]").val() === '') {
-            $('#emailAlert').show('');
+            $('#emailAlert').show();
+            $('#email').trigger('focus');
             ev.preventDefault();
         }
 
-        var birth = $("input[name=birthday]").val();
-        var data = birth.split("-");
-        if (isNaN(Date.parse(data[2] + "-" + data[1] + "-" + data[0]))) {
-            $('#birthAlert').show('');
+        if (!$('input[name=birthday]').val().match(/(\d{2})-(\d{2})-(\d{2})/)) {
+            $('#birthAlert').show();
+            $('#birthday').trigger('focus');
             ev.preventDefault();
+        } else {
+            var birth = $("input[name=birthday]").val();
+            var data = birth.split("-");
+            if (isNaN(Date.parse(data[2] + "-" + data[1] + "-" + data[0]))) {
+                $('#birthAlert').show();
+                $('#birthday').trigger('focus');
+                ev.preventDefault();
+            }
         }
 
         if ($("textarea[name=skills]").val() === '') {
-            $('#skillsAlert').show('');
+            $('#skillsAlert').show();
+            $('#skills').trigger('focus');
             ev.preventDefault();
         }
 
         if ($("input[name=univ]").val() === '') {
-            $('#univAlert').show('');
+            $('#univAlert').show();
+            $('#univ').trigger('focus');
             ev.preventDefault();
         }
 
         if ($("input[name=faculty]").val() === '') {
-            $('#facultyAlert').show('');
+            $('#facultyAlert').show();
+            $('#faculty').trigger('focus');
             ev.preventDefault();
         }
 
         if ($("input[name=dep]").val() === '') {
-            $('#depAlert').show('');
+            $('#depAlert').show();
+            $('#dep').trigger('focus');
             ev.preventDefault();
         }
 
         if ($("select[name=english]").val() === '') {
-            $('#englishAlert').show('');
+            $('#englishAlert').show();
             ev.preventDefault();
         }
 
 
         if ($(".agree input[type=checkbox]:checked").length === 0) {
-            $('#agreeAlert').show('');
+            $('#agreeAlert').show();
             ev.preventDefault();
         }
 
         setTimeout(function () {
-            $('#agreeAlert').hide('');
-            $('#englishAlert').hide('');
-            $('#depAlert').hide('');
-            $('#facultyAlert').hide('');
-            $('#univAlert').hide('');
-            $('#skillsAlert').hide('');
-            $('#birthAlert').hide('');
-            $('#emailAlert').hide('');
-            $('#surnameAlert').hide('');
-            $('#nameAlert').hide('');
-            $('#checkBoxAlert').hide('fade');
-        },8000);
+            $('#agreeAlert').hide();
+            $('#englishAlert').hide();
+            $('#depAlert').hide();
+            $('#facultyAlert').hide();
+            $('#univAlert').hide();
+            $('#skillsAlert').hide();
+            $('#birthAlert').hide();
+            $('#emailAlert').hide();
+            $('#surnameAlert').hide();
+            $('#nameAlert').hide();
+            $('#checkBoxAlert').hide();
+        }, 8000);
     });
 </script>
 </body>
