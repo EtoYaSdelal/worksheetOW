@@ -4,46 +4,59 @@
 <html>
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+          integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
+          crossorigin="anonymous">
     <jsp:useBean id="person" type="model.Person" scope="request"/>
+    <jsp:useBean id="dateFormatter" type="util.DateFormatter" class="util.DateFormatter"/>
     <title>${person.surname}&#8194;${person.name}
     </title>
 </head>
 <body>
-<jsp:include page="fragments/header.jsp"/>
-<section>
 
-    <h5>Имя</h5>
-    <p>${person.name}</p>
-    <h5>Фамилия</h5>
-    <p>${person.surname}</p>
-    <h5>Дата рождения</h5>
-    <p><%=DateFormatter.myDateFormat(person.getBirthday())%>
-    </p>
-    <h5>Почта</h5>
-    <p>${person.email}</p>
+<style>
+    .detail {
+        margin: 50px;
+    }
 
+    .text {
+        font-size: larger;
+        color: rgba(0, 0, 0, 0.79);
+    }
+
+    .lowText {
+        font-size: medium;
+        color: rgba(0, 0, 0, 0.37);
+    }
+
+</style>
+<div class="detail">
+    <h1><span style="margin-bottom: 20px"
+              class="badge badge-secondary">Заявка на поступление в летнюю школу OpenWay</span></h1>
+    <h3><span class="badge badge-secondary">Имя</span></h3><label class="text">${person.name}</label>
+    <h3><span class="badge badge-secondary">Фамилия</span></h3><label class="text">${person.surname}</label>
+    <h4><span class="badge badge-secondary">Дата рождения</span></h4><label
+
+        class="text">${dateFormatter.nonStaticMyDateFormat(person.birthday)}
+</label>
+    <h4><span class="badge badge-secondary">E-mail</span></h4><label class="text">${person.email}</label>
     <c:choose>
-        <c:when test="${person.phone != null}">
-            <h5>Телефон</h5>
-            <p>${person.phone}</p>
+        <c:when test="${!person.phone.equals('')}">
+            <h4><span class="badge badge-secondary">Телефон</span></h4><label class="text">${person.phone}</label>
         </c:when>
     </c:choose>
-
-    <h5>Дата регистрации</h5>
-    <p><%=DateFormatter.myDateFormat(person.getRegistrationDate())%>
-    </p>
-
-
+    <h4><span class="badge badge-secondary">Дата регистрации</span></h4><label
+        class="text">${dateFormatter.nonStaticMyDateFormat(person.registrationDate)}
+</label>
+    <hr>
     <c:forEach items="${person.about}" var="about">
         <jsp:useBean id="about" type="java.util.Map.Entry<model.About, java.lang.String>"/>
-        ${about.key.title}<br>
-        ${about.value}<br>
+        <h4><span class="badge badge-secondary">${about.key.title}</span></h4><label class="text">${about.value}</label>
     </c:forEach>
     <hr>
     <c:forEach items="${person.education}" var="edu">
         <jsp:useBean id="edu" type="java.util.Map.Entry<model.Education, java.lang.String>"/>
-        ${edu.key.title}:&#8194;${edu.value}<br>
+        <h4><span class="badge badge-secondary">${edu.key.title}</span></h4><label class="text">${edu.value}</label>
     </c:forEach>
     <hr>
 
@@ -51,21 +64,24 @@
         <jsp:useBean id="other" type="java.util.Map.Entry<model.Other, java.lang.String>"/>
         <c:choose>
             <c:when test="${other.key.name().equals('OPENDAY')}">
-                ${other.key.title}&#8194;${other.value}<br>
+                <h5><span class="badge badge-secondary">${other.key.title}</span></h5><label
+                    class="text">${other.value}</label>
             </c:when>
             <c:when test="${other.key.name().equals('HEARFROM')}">
-                ${other.key.title}<br>
-                ${other.value}<br>
+                <h5><span class="badge badge-secondary">${other.key.title}</span></h5><label
+                    class="text">${other.value}</label>
             </c:when>
             <c:when test="${other.key.name().equals('AGREEMENT')}">
-                ${other.key.title}
+                <br>
+                <hr>
+                <label class="lowText">${other.key.title}</label>
             </c:when>
         </c:choose>
     </c:forEach>
     <hr>
 
-</section>
-<jsp:include page="fragments/footer.jsp"/>
-<button class="admin-view-css" name="admin" onclick='location.href="admin-view"'>назад</button>
+
+    <button class="btn btn-primary" name="admin" onclick='location.href="admin-view"'>назад</button>
+</div>
 </body>
 </html>

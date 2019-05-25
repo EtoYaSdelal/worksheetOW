@@ -45,7 +45,9 @@ public class AppFormServlet extends HttpServlet {
         LocalDate birthday = LocalDate.parse(req.getParameter("birthday"), formatter);
         String phone = req.getParameter("phone");
         Person person = new Person(id, name, surname, email, birthday);
-        person.setPhone(phone);
+        if (!"".equals(phone)) {
+            person.setPhone(phone);
+        }
 
         StringBuilder interest = new StringBuilder();
         for (int i = 1; i <= 12; i++) {
@@ -63,14 +65,22 @@ public class AppFormServlet extends HttpServlet {
             person.setAbout(About.SKILL, req.getParameter("skills"));
         }
 
-        person.setOther(Other.OPENDAY, req.getParameter("openday"));
+        if (req.getParameter("openDay") != null) {
+            person.setOther(Other.OPENDAY, req.getParameter("openDay"));
+        }
+
         person.setEducation(Education.INSTITUTION, req.getParameter("univ"));
         person.setEducation(Education.FACULTY, req.getParameter("faculty"));
         person.setEducation(Education.DEPARTMENT, req.getParameter("dep"));
         person.setEducation(Education.ENTRYYEAR, req.getParameter("year"));
         person.setAbout(About.ENGLISH, req.getParameter("english"));
-        person.setAbout(About.EXPERIENCE, req.getParameter("exp"));
-        person.setOther(Other.HEARFROM, req.getParameter("hearfrom"));
+
+        if (req.getParameter("exp") != null) {
+            person.setAbout(About.EXPERIENCE, req.getParameter("exp"));
+        }
+        if (req.getParameter("hearFrom") != null) {
+            person.setOther(Other.HEARFROM, req.getParameter("hearFrom"));
+        }
         person.setOther(Other.AGREEMENT, req.getParameter("agree"));
 
         dao.save(person);

@@ -9,4 +9,9 @@ public class DateFormatter {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy");
         return date.format(formatter);
     }
+
+    public String nonStaticMyDateFormat(LocalDate date){
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy");
+        return date.format(formatter);
+    }
 }

@@ -6,40 +6,56 @@
 <html>
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+          integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
+          crossorigin="anonymous">
     <title>Administrator view</title>
 </head>
 <body>
-<%--<jsp:include page="fragments/header.jsp"/>--%>
-<section>
+<style>
+    .view {
+        margin: 50px;
+    }
 
-    </p>
-    <table class="greyGridTable" border="1" cellpadding="8" cellspacing="0">
+    .label {
+        font-size: larger;
+        color: rgba(0, 0, 0, 0.39);
+    }
+</style>
+<div class="view">
+    <jsp:useBean id="personList" scope="request" type="java.util.List" class="java.util.ArrayList"/>
+    <jsp:useBean id="dateFormatter" type="util.DateFormatter" class="util.DateFormatter"/>
+    <label class="label">всего заявок: "${personList.size()}"
+    </label>
+    <table class="table table-borderless">
+        <thead>
         <tr>
             <th><a href="admin-view?sort=byName">Имя</a></th>
             <th>почта</th>
             <th><a href="admin-view?sort=byDate">дата регистрации</a></th>
             <th></th>
         </tr>
+        </thead>
         <c:forEach items="${personList}" var="person">
-            <jsp:useBean id="person" type="model.Person"/>
-            <tr>
-                <td>${person.surname}&#8194;${person.name}
-                </td>
-
-                <td>${person.email}
-                </td>
-                <td><%=DateFormatter.myDateFormat(person.getRegistrationDate())%>
-                </td>
-                <td><a href="admin-view?id=${person.id}&action=detail">подробно</a></td>
-                <td><a href="admin-view?id=${person.id}&action=delete">удалить</a></td>
-            </tr>
+        <jsp:useBean id="person" type="model.Person"/>
+        <tbody>
+        <tr>
+            <td>${person.surname}&#8194;${person.name}
+            </td>
+            <td>${person.email}
+            </td>
+            <td>${dateFormatter.nonStaticMyDateFormat(person.registrationDate)}
+            </td>
+            <td><a href="admin-view?id=${person.id}&action=detail">подробно</a></td>
+            <td><a href="admin-view?id=${person.id}&action=delete">удалить</a></td>
+        </tr>
         </c:forEach>
+        </tbody>
     </table>
-    <h1 class="text-css">всего заявок: <%=((List<Person>) request.getAttribute("personList")).size()%>
-    </h1>
-</section>
-<%--<jsp:include page="fragments/header.jsp"/>--%>
-<button class="admin-view-css" name="back" onclick='location.href="/"'>назад</button>
+
+    <button style="margin-left: 30px" class="btn btn-primary" name="back" onclick='location.href="/"'>Назад</button>
+
+
+</div>
 </body>
 </html>

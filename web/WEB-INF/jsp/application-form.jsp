@@ -17,33 +17,58 @@
 <body>
 <style>
     .my-page {
-        margin: 50px;
+        margin: 100px 150px 150px 200px;
+    }
+    .label {
+        font-size: larger;
+        color: rgba(0, 0, 0, 0.39);
     }
 </style>
-${person.id}
+
 <div class="my-page">
+    <h1><span class="badge badge-secondary">Заявка на поступление в летнюю школу OpenWay</span></h1>
     <form id="myForm" name="myForm" method="post" action="application-form" enctype="application/x-www-form-urlencoded">
         <input type="hidden" name="id" value=${person.id}>
 
+
         <div class="form-group">
-            <label for="name">Имя*</label>
-            <input class="form-control" required id="name" name="name" placeholder="Имя" size="30">
+            <div class="form-row">
+                <div class="col" style="padding-bottom: 30px">
+                    <label class="label" for="name" style="">Имя *</label>
+                    <input class="form-control" id="name" name="name" placeholder="Имя" size="30">
+                    <div id="nameAlert" class="alert alert-danger collapse">
+                        Поле обязательно для заполнения
+                    </div>
+                </div>
 
-            <label for="surname">Фамилия*</label>
-            <input class="form-control" required id="surname" name="surname" placeholder="Фамилия" size="30">
+                <div class="col" style="padding-bottom: 30px">
+                    <label class="label" for="surname">Фамилия *</label>
+                    <input class="form-control" id="surname" name="surname" placeholder="Фамилия" size="30">
+                    <div id="surnameAlert" class="alert alert-danger collapse">
+                        Поле обязательно для заполнения
+                    </div>
+                </div>
+            </div>
 
-            <label for="email">E-mail*</label>
-            <input type="email" class="form-control" required id="email" name="email" placeholder="email" size="30">
+            <label class="label"  for="email">E-mail *</label>
+            <input type="email" class="form-control" id="email" name="email" placeholder="email"
+                   size="30">
+            <div id="emailAlert" class="alert alert-danger collapse">
+                Поле обязательно для заполнения
+            </div>
 
-            <label for="birthday">Дата рождения*</label>
-            <input class="form-control" required id="birthday" name="birthday" placeholder="dd-MM-yyyy" size="9">
+            <label class="label"  class="label"  for="birthday">Дата рождения *</label>
+            <input class="form-control" id="birthday" name="birthday" placeholder="dd-MM-yyyy">
+            <div id="birthAlert" class="alert alert-danger collapse">
+                Поле обязательно для заполнения, формат dd-MM-yyyy
+            </div>
 
-            <label for="phone">Фамилия*</label>
-            <input class="form-control" required id="phone" name="phone" placeholder="phone" size="30">
+            <label class="label"  for="phone">Телефон</label>
+            <input class="form-control" id="phone" name="phone" placeholder="phone" size="30">
         </div>
 
 
-        <label>Чем Вам было бы интересно заниматься?*</label>
+        <label class="label" >Чем Вам было бы интересно заниматься? *</label>
         <div class="form-group questions">
             <div class="custom-control custom-checkbox">
                 <input type="checkbox" class="custom-control-input" id="1" name="1"
@@ -77,11 +102,13 @@ ${person.id}
                 <label class="custom-control-label" for="6">Внедрение сложного ПО (enterprise)</label>
             </div>
             <div class="custom-control custom-checkbox">
-                <input type="checkbox" class="custom-control-input" id="7" name="7" value="Участие в финтех-проектах">
+                <input type="checkbox" class="custom-control-input" id="7" name="7"
+                       value="Участие в финтех-проектах">
                 <label class="custom-control-label" for="7">Участие в финтех-проектах</label>
             </div>
             <div class="custom-control custom-checkbox">
-                <input type="checkbox" class="custom-control-input" id="8" name="8" value="Работа с базами данных">
+                <input type="checkbox" class="custom-control-input" id="8" name="8"
+                       value="Работа с базами данных">
                 <label class="custom-control-label" for="8">Работа с базами данных</label>
             </div>
             <div class="custom-control custom-checkbox">
@@ -89,12 +116,14 @@ ${person.id}
                 <label class="custom-control-label" for="9">Поддержка клиентов</label>
             </div>
             <div class="custom-control custom-checkbox">
-                <input type="checkbox" class="custom-control-input" id="10" name="10" value="Маркетинг в области IT">
+                <input type="checkbox" class="custom-control-input" id="10" name="10"
+                       value="Маркетинг в области IT">
                 <label class="custom-control-label" for="10">Маркетинг в области IT</label>
             </div>
 
             <div class="custom-control custom-checkbox">
-                <input type="checkbox" class="custom-control-input" id="11" name="11" value="Компьютерная безопасность">
+                <input type="checkbox" class="custom-control-input" id="11" name="11"
+                       value="Компьютерная безопасность">
                 <label class="custom-control-label" for="11">Компьютерная безопасность</label>
             </div>
 
@@ -103,111 +132,184 @@ ${person.id}
                        value="Другое (укажите в поле внизу)">
                 <label class="custom-control-label" for="12">Другое (укажите в поле внизу)</label>
             </div>
+            <div id="checkBoxAlert" class="alert alert-danger collapse">
+                Поле обязательно для заполнения
+            </div>
         </div>
 
 
-        <p><b>Ваши комментарии</b></p>
-        <p><textarea rows="10" cols="160" name="comment"></textarea></p>
-
-
-        <p><b>Расскажите о своих знаниях компьютерных технологий, прикладного ПО, языков программирования: *</b></p>
-        <p><textarea required rows="10" cols="160" name="skills"></textarea></p>
-
-        <div class="form-check">
-            <p><b>Я планирую прийти на день открытых дверей и послушать презентацию Школы</b></p>
-            <p><input required type="radio" name="openday" value="Да">Да</p>
-            <p><input type="radio" name="openday" value="Нет">Нет</p>
+        <div class="form-group">
+            <label class="label"  for="comment">Ваши комментарии</label>
+            <textarea style="border-radius: 3px " itemtype="text" id="comment" rows="10" cols="140"
+                      name="comment"></textarea>
         </div>
-        <p><b>Университет *</b></p>
-        <p><input required type="text" name="univ" size="31"></p>
 
-        <p><b>Факультет *</b></p>
-        <p><input required type="text" name="faculty" size="31"></p>
+        <div class="form-group">
+            <label class="label"  for="skills">Расскажите о своих знаниях компьютерных технологий, прикладного ПО, языков
+                программирования: *</label>
+            <textarea style="border-radius: 3px " itemtype="text" id="skills" rows="10" cols="140"
+                      name="skills"></textarea>
+            <div id="skillsAlert" class="alert alert-danger collapse">
+                Поле обязательно для заполнения
+            </div>
+        </div>
 
-        <p><b>Кафедра *</b></p>
-        <p><input required type="text" name="dep" size="31"></p>
+        <label class="label" >Я планирую прийти на день открытых дверей и послушать презентацию Школы</label>
+        <div class="custom-control custom-radio">
+            <input type="radio" id="openDay1" name="openDay" class="custom-control-input" value="Да">
+            <label class="custom-control-label" for="openDay1">Да</label>
+        </div>
 
-        <p><b>Год поступления</b></p>
-        <p><input type="text" name="year" size="31"></p>
+        <div class="custom-control custom-radio">
+            <input type="radio" id="openDay2" name="openDay" class="custom-control-input" value="Нет">
+            <label class="custom-control-label" for="openDay2">Нет</label>
+        </div>
 
-        <p><b>Уровень английского языка *</b></p>
-        <p><select required name="english">
+        <div class="form-group">
+            <label class="label"  for="univ">Университет *</label>
+            <input type="text" class="form-control" id="univ" name="univ">
+            <div id="univAlert" class="alert alert-danger collapse">
+                Поле обязательно для заполнения
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label class="label"  for="faculty">Факультет *</label>
+            <input type="text" class="form-control" id="faculty" name="faculty">
+            <div id="facultyAlert" class="alert alert-danger collapse">
+                Поле обязательно для заполнения
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label class="label"  for="dep">Кафедра *</label>
+            <input type="text" class="form-control" id="dep" name="dep">
+            <div id="depAlert" class="alert alert-danger collapse">
+                Поле обязательно для заполнения
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label class="label"  for="year">Год поступления</label>
+            <input type="text" class="form-control" id="year" name="year">
+        </div>
+
+        <label class="label" >Уровень английского языка *</label>
+        <p><select itemtype="text" name="english">
             <option>Elementary</option>
             <option>Pre-Intermediate</option>
             <option>Intermediate</option>
             <option>Upper Intermediate</option>
             <option>Advanced</option>
         </select></p>
+        <div id="englishAlert" class="alert alert-danger collapse">
+            Поле обязательно для заполнения
+        </div>
 
-        <p><b>Опыт работы (если имеется)</b></p>
-        <p><textarea rows="10" cols="160" name="exp"></textarea></p>
+        <div class="form-group">
+            <label class="label"  for="exp">Опыт работы (если имеется)</label>
+            <textarea style="border-radius: 3px " itemtype="text" id="exp" rows="10" cols="140" name="exp"></textarea>
+        </div>
 
-        <p><b>Откуда Вы узнали о Летней школе?</b></p>
-        <input name="hearfrom" type="text" size="30">
-        <br>
-        <br>
+        <div class="form-group">
+            <label class="label"  for="hearFrom"> Вы узнали о Летней школе?</label>
+            <input type="text" class="form-control" id="hearFrom" name="hearFrom">
+        </div>
 
         <div class="form-group agree">
             <div class="custom-control custom-checkbox">
                 <input type="checkbox" class="custom-control-input" id="agree" name="agree"
                        value="yes">
-                <label class="custom-control-label" for="agree"> Отправляя эту форму, я соглашаюсь на обработку своих
+                <label class="custom-control-label" for="agree"> Отправляя эту форму, я соглашаюсь на обработку
+                    своих
                     персональных данных, согласно с политике Конфиденциальности OpenWay*</label>
+                <div id="agreeAlert" class="alert alert-danger collapse">
+                    Поле обязательно для заполнения
+                </div>
             </div>
         </div>
 
 
-        <div class="error">
-
-        </div>
-        <button class="admin-view-css" type="submit">Сохранить</button>
+        <button type="submit" class="btn btn-primary">Сохранить</button>
     </form>
-    <button class="admin-view-css" onclick="location.href='/'">Отменить</button>
-
+    <button class="btn btn-primary" onclick="location.href='/'">Назад</button>
 
 </div>
-
-<%--<script>
-
-    $("form#myForm").submit(function (ev) {
-        if ($(":checkbox:checked").length === 0) {
-            ev.preventDefault();
-            $(".error").text("Поля отмеченные * обязательны для заполнения?");
-        }
-    });
-</script>--%>
-
-
 <script>
     $("form#myForm").submit(function (ev) {
 
-        var errorText = [];
-
         if ($(".questions input[type=checkbox]:checked").length === 0) {
+            $('#checkBoxAlert').show('');
             ev.preventDefault();
-            errorText.push("А чекбокс выбрать?");
+
         }
 
         if ($("input[name=name]").val() === '') {
+            $('#nameAlert').show('');
             ev.preventDefault();
-            errorText.push("Введите имя");
         }
 
         if ($("input[name=surname]").val() === '') {
+            $('#surnameAlert').show('');
             ev.preventDefault();
-            errorText.push("Введите фамилия");
         }
+
+        if ($("input[name=email]").val() === '') {
+            $('#emailAlert').show('');
+            ev.preventDefault();
+        }
+
+        var birth = $("input[name=birthday]").val();
+        var data = birth.split("-");
+        if (isNaN(Date.parse(data[2] + "-" + data[1] + "-" + data[0]))) {
+            $('#birthAlert').show('');
+            ev.preventDefault();
+        }
+
+        if ($("textarea[name=skills]").val() === '') {
+            $('#skillsAlert').show('');
+            ev.preventDefault();
+        }
+
+        if ($("input[name=univ]").val() === '') {
+            $('#univAlert').show('');
+            ev.preventDefault();
+        }
+
+        if ($("input[name=faculty]").val() === '') {
+            $('#facultyAlert').show('');
+            ev.preventDefault();
+        }
+
+        if ($("input[name=dep]").val() === '') {
+            $('#depAlert').show('');
+            ev.preventDefault();
+        }
+
+        if ($("select[name=english]").val() === '') {
+            $('#englishAlert').show('');
+            ev.preventDefault();
+        }
+
 
         if ($(".agree input[type=checkbox]:checked").length === 0) {
+            $('#agreeAlert').show('');
             ev.preventDefault();
-            $(".error").text("Поля отмеченные * обязательны для заполнения?")
         }
 
-        // if (errorText) {
-        //     ev.preventDefault();
-        //     $(".error").text(errorText);
-        // }
-
+        setTimeout(function () {
+            $('#agreeAlert').hide('');
+            $('#englishAlert').hide('');
+            $('#depAlert').hide('');
+            $('#facultyAlert').hide('');
+            $('#univAlert').hide('');
+            $('#skillsAlert').hide('');
+            $('#birthAlert').hide('');
+            $('#emailAlert').hide('');
+            $('#surnameAlert').hide('');
+            $('#nameAlert').hide('');
+            $('#checkBoxAlert').hide('fade');
+        },8000);
     });
 </script>
 </body>
