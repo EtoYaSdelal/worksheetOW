@@ -1,5 +1,5 @@
 <%@ page import="model.Person" %>
-<%@ page import="java.time.LocalDate" %>
+<%@ page import="util.DateFormatter" %>
 <%@ page import="java.util.List" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
@@ -10,16 +10,15 @@
     <title>Administrator view</title>
 </head>
 <body>
-<jsp:include page="fragments/header.jsp"/>
+<%--<jsp:include page="fragments/header.jsp"/>--%>
 <section>
 
     </p>
     <table class="greyGridTable" border="1" cellpadding="8" cellspacing="0">
         <tr>
-            <th>Имя</th>
-            <%--<th>Фамилия</th>--%>
+            <th><a href="admin-view?sort=byName">Имя</a></th>
             <th>почта</th>
-            <th>дата регистрации</th>
+            <th><a href="admin-view?sort=byDate">дата регистрации</a></th>
             <th></th>
         </tr>
         <c:forEach items="${personList}" var="person">
@@ -30,14 +29,17 @@
 
                 <td>${person.email}
                 </td>
-                <td>${LocalDate.now().toString()}</td>
+                <td><%=DateFormatter.myDateFormat(person.getRegistrationDate())%>
+                </td>
                 <td><a href="admin-view?id=${person.id}&action=detail">подробно</a></td>
+                <td><a href="admin-view?id=${person.id}&action=delete">удалить</a></td>
             </tr>
         </c:forEach>
     </table>
-    <h1 class="text-css">всего заявок: <%=((List<Person>) request.getAttribute("personList")).size()%></h1>
+    <h1 class="text-css">всего заявок: <%=((List<Person>) request.getAttribute("personList")).size()%>
+    </h1>
 </section>
-<jsp:include page="fragments/footer.jsp"/>
-<button class="admin-view-css" name="back" onclick='location.href="/ow-summer-school-spb"'>назад</button>
+<%--<jsp:include page="fragments/header.jsp"/>--%>
+<button class="admin-view-css" name="back" onclick='location.href="/"'>назад</button>
 </body>
 </html>

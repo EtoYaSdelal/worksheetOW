@@ -14,6 +14,7 @@ public class Person {
     private String email;
     private LocalDate birthday;
     private String phone;
+    private LocalDate registrationDate;
 
     private Map<About, String> about = new EnumMap<>(About.class);
     private Map<Education, String> education = new EnumMap<>(Education.class);
@@ -22,6 +23,7 @@ public class Person {
 
     public Person() {
         id = UUID.randomUUID().toString();
+        registrationDate = LocalDate.now();
     }
 
     public Person(String name, String surname, String email, LocalDate birthday) {
@@ -40,6 +42,7 @@ public class Person {
         this.surname = surname;
         this.email = email;
         this.birthday = birthday;
+        registrationDate = LocalDate.now();
     }
 
     public String getId() {
@@ -126,6 +129,14 @@ public class Person {
         return other.get(type);
     }
 
+    public LocalDate getRegistrationDate() {
+        return registrationDate;
+    }
+
+    public void setRegistrationDate(LocalDate registrationDate) {
+        this.registrationDate = registrationDate;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -155,8 +166,9 @@ public class Person {
                 "name=" + name + "\n" +
                 "surname=" + surname + "\n" +
                 "email=" + email + "\n" +
-                "birthday=" + birthday +
+                "birthday=" + birthday + "\n" +
                 "phone=" + phone + "\n" +
+                "registration Date=" + registrationDate + "\n" +
                 "about=" + about + "\n" +
                 "education=" + education + "\n" +
                 "other=" + other +

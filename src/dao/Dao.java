@@ -12,19 +12,22 @@ import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
-public class DAO {
+public class Dao {
     private Connector connector;
-//    private String url = "jdbc:postgresql://localhost:5432/postgres";
-//    private String user = "postgres";
-//    private String pass = "admin";
+    private String url = "jdbc:postgresql://localhost:5432/worksheet";
+    private String user = "postgres";
+    private String pass = "admin";
+//    private String url = "jdbc:postgresql://ec2-54-246-92-116.eu-west-1.compute.amazonaws.com:5432/d42i0th4jcpbu8";
+//    private String user = "vkatyqwzspqqxu";
+//    private String pass = "d21b3df4b569feb36aa0c9075f16fbdc28cc4d1cebc76dbc728ddaa1fa6d8002";
 
-    public DAO() {
+    public Dao() {
         try {
             Class.forName("org.postgresql.Driver");
         } catch (ClassNotFoundException e) {
             e.printStackTrace();
         }
-        connector = new Connector(() -> DriverManager.getConnection("jdbc:postgresql://localhost:5432/postgres", "postgres", "admin"));
+        connector = new Connector(() -> DriverManager.getConnection(url, user, pass));
     }
 
     public void clear() {
@@ -41,22 +44,34 @@ public class DAO {
     public void save(Person person) {
         connector.executeTransaction(connection -> {
             try (PreparedStatement preparedStatement = connection.prepareStatement("INSERT into " +
-                    "person(id, name, surname, email, birthday, phone)" +
-                    " VALUES (?,?,?,?,?,?)")) {
+                    "person(id, name, surname, email, birthday, phone, registration_date)" +
+                    " VALUES (?,?,?,?,?,?,?)")) {
                 preparedStatement.setString(1, person.getId());
                 preparedStatement.setString(2, person.getName());
                 preparedStatement.setString(3, person.getSurname());
                 preparedStatement.setString(4, person.getEmail());
                 preparedStatement.setTimestamp(5, Timestamp.valueOf(person.getBirthday().atStartOfDay()));
                 preparedStatement.setString(6, person.getPhone());
+                preparedStatement.setTimestamp(7, Timestamp.valueOf(person.getRegistrationDate().atStartOfDay()));
                 if (preparedStatement.executeUpdate() == 0) {
-                    throw new RuntimeException(person + " don't save with runtime exception");
+                    throw new RuntimeException(person.getName() + " don't save with runtime exception");
                 }
             }
             saveAbout(person, connection);
             saveEducation(person, connection);
             saveOther(person, connection);
             return null;
+        });
+    }
+
+    public void delete(String id) {
+        connector.execute("DELETE from person where id = ?", preparedStatement -> {
+            preparedStatement.setString(1, id);
+            if (preparedStatement.executeUpdate() <= 0) {
+                throw new RuntimeException("Runtime exception with id " + id);
+            }
+            return null;
+
         });
     }
 
@@ -99,10 +114,18 @@ public class DAO {
         });
     }
 
-    public List<Person> getAll() {
+    public List<Person> getAllSortedByRegDate() {
+        return getAll("SELECT * FROM person order by registration_date");
+    }
+
+    public List<Person> getAllSortedByName() {
+        return getAll("SELECT * FROM person order by name,surname,id");
+    }
+
+    private List<Person> getAll(String sql) {
         return connector.executeTransaction(connection -> {
             Map<String, Person> map = new LinkedHashMap<>();
-            try (PreparedStatement preparedStatement = connection.prepareStatement("SELECT * FROM person order by name,surname,id")) {
+            try (PreparedStatement preparedStatement = connection.prepareStatement(sql)) {
                 ResultSet resultSet = preparedStatement.executeQuery();
                 while (resultSet.next()) {
                     Person person = getPersonFromDB(resultSet);
@@ -203,6 +226,8 @@ public class DAO {
                 resultSet.getString(4),
                 resultSet.getTimestamp(5).toLocalDateTime().toLocalDate());
         person.setPhone(resultSet.getString(6));
+        person.setRegistrationDate(resultSet.getTimestamp(7).toLocalDateTime().toLocalDate());
+
         return person;
     }
 }

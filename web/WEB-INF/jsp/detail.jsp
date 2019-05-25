@@ -1,3 +1,4 @@
+<%@ page import="util.DateFormatter" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <html>
@@ -16,12 +17,23 @@
     <p>${person.name}</p>
     <h5>Фамилия</h5>
     <p>${person.surname}</p>
+    <h5>Дата рождения</h5>
+    <p><%=DateFormatter.myDateFormat(person.getBirthday())%>
+    </p>
     <h5>Почта</h5>
     <p>${person.email}</p>
-    <h5>Дата рождения</h5>
-    <p>${person.birthday.toString()}</p>
-    <h5>Телефон</h5>
-    <p>${person.phone}</p>
+
+    <c:choose>
+        <c:when test="${person.phone != null}">
+            <h5>Телефон</h5>
+            <p>${person.phone}</p>
+        </c:when>
+    </c:choose>
+
+    <h5>Дата регистрации</h5>
+    <p><%=DateFormatter.myDateFormat(person.getRegistrationDate())%>
+    </p>
+
 
     <c:forEach items="${person.about}" var="about">
         <jsp:useBean id="about" type="java.util.Map.Entry<model.About, java.lang.String>"/>

@@ -16,8 +16,8 @@ public class Connector {
     }
 
     public <T> T execute(String sql, Executor<T> executor) {
-        try (PreparedStatement preparedStatement = connectionFactory.getConnection().prepareStatement(sql)) {
-            preparedStatement.execute();
+        try (Connection connection = connectionFactory.getConnection();
+             PreparedStatement preparedStatement = connection.prepareStatement(sql)) {
             return executor.execute(preparedStatement);
         } catch (SQLException e) {
             throw new RuntimeException("Prepared statement execute runtime exception", e);

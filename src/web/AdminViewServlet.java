@@ -1,6 +1,6 @@
 package web;
 
-import dao.DAO;
+import dao.Dao;
 import model.Person;
 
 import javax.servlet.ServletConfig;
@@ -11,13 +11,13 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
 public class AdminViewServlet extends HttpServlet {
-    private DAO dao;
+    private Dao dao;
 
 
     @Override
     public void init(ServletConfig config) throws ServletException {
         super.init(config);
-        dao = new DAO();
+        dao = new Dao();
 
     }
 
@@ -32,10 +32,16 @@ public class AdminViewServlet extends HttpServlet {
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         String id = req.getParameter("id");
         String action = req.getParameter("action");
+        String sort = req.getParameter("sort");
         Person person;
 
-        if (action == null) {
-            req.setAttribute("personList", dao.getAll());
+        if ("byDate".equals(sort)) {
+            req.setAttribute("personList", dao.getAllSortedByRegDate());
+            req.getRequestDispatcher("/WEB-INF/jsp/admin-view.jsp").forward(req, resp);
+        }
+
+        if (action == null || "byName".equals(sort)) {
+            req.setAttribute("personList", dao.getAllSortedByName());
             req.getRequestDispatcher("/WEB-INF/jsp/admin-view.jsp").forward(req, resp);
         }
 
@@ -45,8 +51,13 @@ public class AdminViewServlet extends HttpServlet {
             req.getRequestDispatcher("/WEB-INF/jsp/detail.jsp").forward(req, resp);
         }
 
+        if ("delete".equals(action)) {
+            dao.delete(id);
+            req.setAttribute("personList", dao.getAllSortedByName());
+            req.getRequestDispatcher("/WEB-INF/jsp/admin-view.jsp").forward(req, resp);
+        }
+
     }
 
 
 }
-
