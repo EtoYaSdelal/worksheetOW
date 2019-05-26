@@ -57,7 +57,37 @@
     <hr>
     <c:forEach items="${person.about}" var="about">
         <jsp:useBean id="about" type="java.util.Map.Entry<model.About, java.lang.String>"/>
-        <h4><span class="badge badge-secondary">${about.key.title}</span></h4><label class="text">${about.value}</label>
+        <c:choose>
+            <c:when test="${about.key.name().equals('INTEREST')}">
+                <h4><span class="badge badge-secondary">${about.key.title}</span></h4>
+                <c:forEach items="${about.value.split('\\\n')}" var="interest">
+                    <jsp:useBean id="interest" type="java.lang.String" class="java.lang.String"/>
+                    <p><label class="text">${interest}</label></p>
+                </c:forEach>
+            </c:when>
+
+            <c:when test="${about.key.name().equals('COMMENT') && !about.value.equals('')}">
+                <h4><span class="badge badge-secondary">${about.key.title}</span></h4>
+                <label class="text">${about.value}</label>
+            </c:when>
+
+            <c:when test="${about.key.name().equals('SKILL') && !about.value.equals('')}">
+                <h4><span class="badge badge-secondary">${about.key.title}</span></h4>
+                <label class="text">${about.value}</label>
+            </c:when>
+
+            <c:when test="${about.key.name().equals('EXPERIENCE') && !about.value.equals('')}">
+                <h4><span class="badge badge-secondary">${about.key.title}</span></h4>
+                <label class="text">${about.value}</label>
+            </c:when>
+
+            <c:when test="${about.key.name().equals('ENGLISH') && !about.value.equals('')}">
+                <h4><span class="badge badge-secondary">${about.key.title}</span></h4>
+                <label class="text">${about.value}</label>
+            </c:when>
+
+        </c:choose>
+
     </c:forEach>
     <hr>
     <c:forEach items="${person.education}" var="edu">
@@ -73,7 +103,7 @@
                 <h5><span class="badge badge-secondary">${other.key.title}</span></h5><label
                     class="text">${other.value}</label>
             </c:when>
-            <c:when test="${other.key.name().equals('HEARFROM')}">
+            <c:when test="${other.key.name().equals('HEARFROM') && !other.value.equals('')}">
                 <h5><span class="badge badge-secondary">${other.key.title}</span></h5><label
                     class="text">${other.value}</label>
             </c:when>

@@ -11,12 +11,9 @@ import java.sql.ResultSet;
 public class DaoUser {
 
     private Connector connector;
-//    private String urldb = "jdbc:postgresql://localhost:5432/worksheet";
-//    private String userdb = "postgres";
-//    private String passdb = "admin";
-    private String urldb = "jdbc:postgresql://ec2-54-246-92-116.eu-west-1.compute.amazonaws.com:5432/d42i0th4jcpbu8";
-    private String userdb = "vkatyqwzspqqxu";
-    private String passdb = "d21b3df4b569feb36aa0c9075f16fbdc28cc4d1cebc76dbc728ddaa1fa6d8002";
+    private String urldb = "jdbc:postgresql://localhost:5432/worksheet";
+    private String userdb = "postgres";
+    private String passdb = "admin";
 
     public DaoUser() {
 
