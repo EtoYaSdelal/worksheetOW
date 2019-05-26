@@ -1,6 +1,3 @@
-<%@ page import="model.Person" %>
-<%@ page import="util.DateFormatter" %>
-<%@ page import="java.util.List" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <html>
@@ -17,16 +14,33 @@
         margin: 50px;
     }
 
-    .label {
+    .labelLeft, .labelRight {
+        float: left;
+        width: 50%;
+    }
+
+    .labelRight {
+        text-align: right;
+    }
+
+    .labelLeft {
         font-size: larger;
         color: rgba(0, 0, 0, 0.39);
     }
 </style>
 <div class="view">
+
+    <c:choose>
+        <c:when test="${sessionScope.get('login') == null}">
+            <jsp:forward page="/login"/>
+        </c:when>
+    </c:choose>
+
+
     <jsp:useBean id="personList" scope="request" type="java.util.List" class="java.util.ArrayList"/>
     <jsp:useBean id="dateFormatter" type="util.DateFormatter" class="util.DateFormatter"/>
-    <label class="label">всего заявок: "${personList.size()}"
-    </label>
+    <label class="labelLeft">всего заявок: "${personList.size()}"
+    </label> <label class="labelRight"><a href="/logout">выйти</a> </label>
     <table class="table table-borderless">
         <thead>
         <tr>

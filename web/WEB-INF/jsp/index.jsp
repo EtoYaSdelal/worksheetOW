@@ -15,10 +15,28 @@
         padding: 10px;
         margin: 120px 120px 0px 550px;
     }
+    .labelRight {
+        width: 90%;
+        text-align: right;
+    }
+    .labelLogin {
+        width: 90%;
+        text-align: right;
+        color: rgba(0, 0, 0, 0.34);
+    }
+
 </style>
+<label class="labelRight"><a href="/login">войти</a></label>
+<label class="labelRight"><a href="/logout">выйти</a> </label>
+<label class="labelLogin">Login:  ${sessionScope.get('login')}</label>
 <div class="index">
-    <button style="margin-bottom: 30px; margin-left: 11px" class="btn btn-primary" name="appform" onclick='location.href="application-form"'> подать заявку</button>
-    <button class="btn btn-primary" name="admin" onclick='location.href="admin-view"'>просмотр заявок</button>
+    <button style="margin-bottom: 30px; margin-left: 11px" class="btn btn-primary" name="appform"
+            onclick='location.href="/application-form"'> подать заявку
+    </button>
+
+    <button class="btn btn-primary" name="admin" onclick='location.href="/admin-view"'>просмотр заявок
+    </button>
+
 </div>
 </body>
 </html>

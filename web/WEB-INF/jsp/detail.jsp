@@ -1,4 +1,3 @@
-<%@ page import="util.DateFormatter" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <html>
@@ -30,6 +29,13 @@
     }
 
 </style>
+
+<c:choose>
+    <c:when test="${sessionScope.get('login') == null}">
+        <jsp:forward page="/login"/>
+    </c:when>
+</c:choose>
+
 <div class="detail">
     <h1><span style="margin-bottom: 20px"
               class="badge badge-secondary">Заявка на поступление в летнюю школу OpenWay</span></h1>

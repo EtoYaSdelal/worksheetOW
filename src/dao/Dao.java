@@ -14,12 +14,12 @@ import java.util.Map;
 
 public class Dao {
     private Connector connector;
-//    private String url = "jdbc:postgresql://localhost:5432/worksheet";
-//    private String user = "postgres";
-//    private String pass = "admin";
-    private String url = "jdbc:postgresql://ec2-54-246-92-116.eu-west-1.compute.amazonaws.com:5432/d42i0th4jcpbu8";
-    private String user = "vkatyqwzspqqxu";
-    private String pass = "d21b3df4b569feb36aa0c9075f16fbdc28cc4d1cebc76dbc728ddaa1fa6d8002";
+    private String url = "jdbc:postgresql://localhost:5432/worksheet";
+    private String user = "postgres";
+    private String pass = "admin";
+//    private String url = "jdbc:postgresql://ec2-54-246-92-116.eu-west-1.compute.amazonaws.com:5432/d42i0th4jcpbu8";
+//    private String user = "vkatyqwzspqqxu";
+//    private String pass = "d21b3df4b569feb36aa0c9075f16fbdc28cc4d1cebc76dbc728ddaa1fa6d8002";
 
     public Dao() {
         try {
