@@ -14,9 +14,10 @@ import java.util.Map;
 
 public class Dao {
     private Connector connector;
-    private String url = "jdbc:postgresql://localhost:5432/worksheet";
-    private String user = "postgres";
-    private String pass = "admin";
+    private String urldb = "jdbc:postgresql://localhost:5432/worksheet";
+    private String userdb = "postgres";
+    private String passdb = "admin";
+
 
     public Dao() {
         try {
@@ -24,7 +25,7 @@ public class Dao {
         } catch (ClassNotFoundException e) {
             e.printStackTrace();
         }
-        connector = new Connector(() -> DriverManager.getConnection(url, user, pass));
+        connector = new Connector(() -> DriverManager.getConnection(urldb, userdb, passdb));
     }
 
     public void clear() {

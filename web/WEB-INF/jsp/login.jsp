@@ -11,11 +11,12 @@
 <body>
 <style>
     .form {
-        margin: 50px 500px 0 500px;
+        margin: 5% 40% 0 40%;
+
     }
 
     .btns {
-        margin-left: 100px;
+        margin-left: 65px;
     }
 </style>
 
@@ -37,7 +38,7 @@
 
         <div class="form-group">
             <label for="pass">Пароль</label>
-            <input type="text" class="form-control" id="pass" placeholder="password" name="pass">
+            <input type="password" class="form-control" id="pass" placeholder="password" name="pass">
         </div>
 
         <div class="btns">

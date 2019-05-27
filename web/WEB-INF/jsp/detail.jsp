@@ -28,6 +28,17 @@
         color: rgba(0, 0, 0, 0.37);
     }
 
+    .label-default {
+        font-size: x-large;
+
+    }
+
+    .textx {
+        margin-left: 20px;
+        font-size: larger;
+        color: rgba(0, 0, 0, 0.79);
+    }
+
 </style>
 
 <c:choose>
@@ -38,52 +49,54 @@
 
 <div class="detail">
     <h1><span style="margin-bottom: 20px"
-              class="badge badge-secondary">Заявка на поступление в летнюю школу OpenWay</span></h1>
-    <h3><span class="badge badge-secondary">Имя</span></h3><label class="text">${person.name}</label>
-    <h3><span class="badge badge-secondary">Фамилия</span></h3><label class="text">${person.surname}</label>
-    <h4><span class="badge badge-secondary">Дата рождения</span></h4><label
+              class="label label-default">Заявка на поступление в летнюю школу OpenWay</span></h1>
+    <span class="label label-default">Имя:</span><label class="textx"> ${person.name}</label><br>
 
-        class="text">${dateFormatter.nonStaticMyDateFormat(person.birthday)}
-</label>
-    <h4><span class="badge badge-secondary">E-mail</span></h4><label class="text">${person.email}</label>
+    <span class="label label-default">Фамилия:</span><label class="textx">${person.surname}</label><br>
+
+    <span class="label label-default">Дата рождения:</span><label
+        class="textx">${dateFormatter.nonStaticMyDateFormat(person.birthday)}
+</label><br>
+
+    <span class="label label-default">E-mail:</span><label class="textx">${person.email}</label><br>
     <c:choose>
         <c:when test="${!person.phone.equals('')}">
-            <h4><span class="badge badge-secondary">Телефон</span></h4><label class="text">${person.phone}</label>
+            <span class="label label-default">Телефон:</span><label class="textx">${person.phone}</label><br>
         </c:when>
     </c:choose>
-    <h4><span class="badge badge-secondary">Дата регистрации</span></h4><label
-        class="text">${dateFormatter.nonStaticMyDateFormat(person.registrationDate)}
-</label>
+    <span class="label label-default">Дата регистрации:</span><label
+        class="textx">${dateFormatter.nonStaticMyDateFormat(person.registrationDate)}
+</label><br>
     <hr>
     <c:forEach items="${person.about}" var="about">
         <jsp:useBean id="about" type="java.util.Map.Entry<model.About, java.lang.String>"/>
         <c:choose>
             <c:when test="${about.key.name().equals('INTEREST')}">
-                <h4><span class="badge badge-secondary">${about.key.title}</span></h4>
+                <span class="label label-default">${about.key.title}</span><br>
                 <c:forEach items="${about.value.split('\\\n')}" var="interest">
                     <jsp:useBean id="interest" type="java.lang.String" class="java.lang.String"/>
-                    <p><label class="text">${interest}</label></p>
+                    <label class="text">${interest}</label><br>
                 </c:forEach>
             </c:when>
 
             <c:when test="${about.key.name().equals('COMMENT') && !about.value.equals('')}">
-                <h4><span class="badge badge-secondary">${about.key.title}</span></h4>
-                <label class="text">${about.value}</label>
+                <span class="label label-default">${about.key.title}</span><br>
+                <label class="text">${about.value}</label><br>
             </c:when>
 
             <c:when test="${about.key.name().equals('SKILL') && !about.value.equals('')}">
-                <h4><span class="badge badge-secondary">${about.key.title}</span></h4>
-                <label class="text">${about.value}</label>
+                <span class="label label-default">${about.key.title}</span><br>
+                <label class="text">${about.value}</label><br>
             </c:when>
 
             <c:when test="${about.key.name().equals('EXPERIENCE') && !about.value.equals('')}">
-                <h4><span class="badge badge-secondary">${about.key.title}</span></h4>
-                <label class="text">${about.value}</label>
+                <span class="label label-default">${about.key.title}</span><br>
+                <label class="text">${about.value}</label><br>
             </c:when>
 
             <c:when test="${about.key.name().equals('ENGLISH') && !about.value.equals('')}">
-                <h4><span class="badge badge-secondary">${about.key.title}</span></h4>
-                <label class="text">${about.value}</label>
+                <span class="label label-default">${about.key.title}:</span>
+                <label class="textx">${about.value}</label><br>
             </c:when>
 
         </c:choose>
@@ -92,23 +105,27 @@
     <hr>
     <c:forEach items="${person.education}" var="edu">
         <jsp:useBean id="edu" type="java.util.Map.Entry<model.Education, java.lang.String>"/>
-        <h4><span class="badge badge-secondary">${edu.key.title}</span></h4><label class="text">${edu.value}</label>
+        <span class="label label-default">${edu.key.title}:</span>
+        <label class="textx">${edu.value}</label><br>
     </c:forEach>
     <hr>
 
     <c:forEach items="${person.other}" var="other">
         <jsp:useBean id="other" type="java.util.Map.Entry<model.Other, java.lang.String>"/>
         <c:choose>
-            <c:when test="${other.key.name().equals('OPENDAY')}">
-                <h5><span class="badge badge-secondary">${other.key.title}</span></h5><label
-                    class="text">${other.value}</label>
-            </c:when>
+
             <c:when test="${other.key.name().equals('HEARFROM') && !other.value.equals('')}">
-                <h5><span class="badge badge-secondary">${other.key.title}</span></h5><label
-                    class="text">${other.value}</label>
+                <span class="label label-default">${other.key.title}</span> <br>
+                <label
+                        class="text">${other.value}</label><br>
             </c:when>
+
+            <c:when test="${other.key.name().equals('OPENDAY')}">
+                <span class="label label-default">${other.key.title}</span>
+                <label class="textx">${other.value}</label><br>
+            </c:when>
+
             <c:when test="${other.key.name().equals('AGREEMENT')}">
-                <br>
                 <hr>
                 <label class="lowText">${other.key.title}</label>
             </c:when>

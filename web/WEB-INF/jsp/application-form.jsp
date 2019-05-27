@@ -3,7 +3,6 @@
 <html>
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-    <%-- <link rel="stylesheet" href="css/style.css">--%>
     <title>Application form</title>
     <script
             src="https://code.jquery.com/jquery-3.4.1.js"
@@ -52,14 +51,14 @@
             </div>
 
             <label class="label" for="email">E-mail *</label>
-            <input type="email" class="form-control" id="email" name="email" placeholder="email"
+            <input type="text" class="form-control" id="email" name="email" placeholder="email"
                    size="30">
             <div id="emailAlert" class="alert alert-danger collapse">
                 Поле обязательно для заполнения
             </div>
 
-            <label class="label" class="label" for="birthday">Дата рождения *</label>
-            <input class="form-control" id="birthday" name="birthday" placeholder="dd-MM-yyyy">
+            <label class="label" for="birthday">Дата рождения *</label>
+            <input class="form-control" id="birthday" name="birthday" placeholder="dd-MM-yyyy" maxlength="10">
             <div id="birthAlert" class="alert alert-danger collapse">
                 Поле обязательно для заполнения, формат dd-MM-yyyy
             </div>
@@ -141,14 +140,14 @@
 
         <div class="form-group">
             <label class="label" for="comment">Ваши комментарии</label>
-            <textarea style="border-radius: 3px " itemtype="text" id="comment" rows="10" cols="140"
+            <textarea class="form-control" itemtype="text" id="comment" rows="10" cols="140"
                       name="comment"></textarea>
         </div>
 
         <div class="form-group">
             <label class="label" for="skills">Расскажите о своих знаниях компьютерных технологий, прикладного ПО, языков
                 программирования: *</label>
-            <textarea style="border-radius: 3px " itemtype="text" id="skills" rows="10" cols="140"
+            <textarea class="form-control" itemtype="text" id="skills" rows="10" cols="140"
                       name="skills"></textarea>
             <div id="skillsAlert" class="alert alert-danger collapse">
                 Поле обязательно для заполнения
@@ -192,11 +191,11 @@
 
         <div class="form-group">
             <label class="label" for="year">Год поступления</label>
-            <input type="text" class="form-control" id="year" name="year">
+            <input type="text" class="form-control" id="year" name="year" maxlength="4">
         </div>
 
         <label class="label">Уровень английского языка *</label>
-        <p><select itemtype="text" name="english">
+        <p><select itemtype="text" name="english" style="border-radius: 3px ">
             <option>Elementary</option>
             <option>Pre-Intermediate</option>
             <option>Intermediate</option>
@@ -209,7 +208,7 @@
 
         <div class="form-group">
             <label class="label" for="exp">Опыт работы (если имеется)</label>
-            <textarea style="border-radius: 3px " itemtype="text" id="exp" rows="10" cols="140" name="exp"></textarea>
+            <textarea class="form-control" itemtype="text" id="exp" rows="10" cols="140" name="exp"></textarea>
         </div>
 
         <div class="form-group">
@@ -237,13 +236,12 @@
 
 </div>
 <script>
-    $("form#myForm").on('submit',function (ev) {
+    $("form#myForm").on('submit', function (ev) {
 
         if ($(".questions input[type=checkbox]:checked").length === 0) {
             $('#checkBoxAlert').show();
             $('#9').trigger('focus');
             ev.preventDefault();
-
         }
 
         if ($("input[name=name]").val() === '') {
@@ -258,13 +256,14 @@
             ev.preventDefault();
         }
 
-        if ($("input[name=email]").val() === '') {
+
+        if (!$("input[name=email]").val().match(/^([A-Za-z0-9_\-\.])+\@([A-Za-z0-9_\-\.])+\.([A-Za-z]{2,4})$/)) {
             $('#emailAlert').show();
             $('#email').trigger('focus');
             ev.preventDefault();
         }
 
-        if (!$('input[name=birthday]').val().match(/(\d{2})-(\d{2})-(\d{2})/)) {
+        if (!$('input[name=birthday]').val().match(/(\d{2})-(\d{2})-(\d{4})/)) {
             $('#birthAlert').show();
             $('#birthday').trigger('focus');
             ev.preventDefault();
