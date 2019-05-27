@@ -105,8 +105,27 @@
     <hr>
     <c:forEach items="${person.education}" var="edu">
         <jsp:useBean id="edu" type="java.util.Map.Entry<model.Education, java.lang.String>"/>
-        <span class="label label-default">${edu.key.title}:</span>
-        <label class="textx">${edu.value}</label><br>
+        <c:choose>
+            <c:when test="${edu.key.name().equals('INSTITUTION') && !edu.value.equals('')}">
+                <span class="label label-default">${edu.key.title}:</span>
+                <label class="textx">${edu.value}</label><br>
+            </c:when>
+
+            <c:when test="${edu.key.name().equals('FACULTY') && !edu.value.equals('')}">
+                <span class="label label-default">${edu.key.title}:</span>
+                <label class="textx">${edu.value}</label><br>
+            </c:when>
+
+            <c:when test="${edu.key.name().equals('DEPARTMENT') && !edu.value.equals('')}">
+                <span class="label label-default">${edu.key.title}:</span>
+                <label class="textx">${edu.value}</label><br>
+            </c:when>
+
+            <c:when test="${edu.key.name().equals('ENTRYYEAR') && !edu.value.equals('')}">
+                <span class="label label-default">${edu.key.title}:</span>
+                <label class="textx">${edu.value}</label><br>
+            </c:when>
+        </c:choose>
     </c:forEach>
     <hr>
 
