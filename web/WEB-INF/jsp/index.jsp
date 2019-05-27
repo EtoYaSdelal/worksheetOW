@@ -36,7 +36,6 @@
 
     <button class="btn btn-primary" name="admin" onclick='location.href="/admin-view"'>просмотр заявок
     </button>
-
 </div>
 </body>
 </html>

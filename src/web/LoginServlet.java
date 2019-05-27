@@ -39,12 +39,9 @@ public class LoginServlet extends HttpServlet {
                 session.setAttribute("pass", pass);
                 resp.sendRedirect("/");
             } else {
-              //  req.setAttribute("error", "error");
                 resp.sendRedirect("/login");
-
             }
         }
-
     }
 
     @Override

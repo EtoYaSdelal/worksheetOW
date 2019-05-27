@@ -29,7 +29,7 @@
 
 <div class="form">
 
-    <form id="logForm" method="get" id="auth" action="login" enctype="application/x-www-form-urlencoded">
+    <form id="logForm" method="get" action="login" enctype="application/x-www-form-urlencoded">
 
         <div class="form-group">
             <label for="login">Логин</label>
@@ -46,7 +46,6 @@
             <button type="button" class="btn btn-primary" onclick="location.href='/'">Назад</button>
         </div>
     </form>
-
 </div>
 </body>
 </html>

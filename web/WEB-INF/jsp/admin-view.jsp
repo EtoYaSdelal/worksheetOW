@@ -69,7 +69,6 @@
 
     <button style="margin-left: 30px" class="btn btn-primary" name="back" onclick='location.href="/"'>Назад</button>
 
-
 </div>
 </body>
 </html>

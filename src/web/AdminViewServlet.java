@@ -13,12 +13,10 @@ import java.io.IOException;
 public class AdminViewServlet extends HttpServlet {
     private Dao dao;
 
-
     @Override
     public void init(ServletConfig config) throws ServletException {
         super.init(config);
         dao = new Dao();
-
     }
 
     @Override
@@ -56,8 +54,5 @@ public class AdminViewServlet extends HttpServlet {
             req.setAttribute("personList", dao.getAllSortedByName());
             req.getRequestDispatcher("/WEB-INF/jsp/admin-view.jsp").forward(req, resp);
         }
-
     }
-
-
 }

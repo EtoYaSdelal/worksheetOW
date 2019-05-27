@@ -117,7 +117,7 @@ public class Dao {
     }
 
     public List<Person> getAllSortedByName() {
-        return getAll("SELECT * FROM person order by name,surname,id");
+        return getAll("SELECT * FROM person order by surname, name,id");
     }
 
     private List<Person> getAll(String sql) {

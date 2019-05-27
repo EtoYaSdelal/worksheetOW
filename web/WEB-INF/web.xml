@@ -13,7 +13,6 @@
         <url-pattern>/</url-pattern>
     </servlet-mapping>
 
-
     <servlet>
         <servlet-name>AdminViewServlet</servlet-name>
         <servlet-class>web.AdminViewServlet</servlet-class>
@@ -49,7 +48,4 @@
         <servlet-name>LogoutServlet</servlet-name>
         <url-pattern>/logout</url-pattern>
     </servlet-mapping>
-
-
 </web-app>
-

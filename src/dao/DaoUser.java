@@ -2,11 +2,9 @@ package dao;
 
 import model.User;
 import util.Connector;
-
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
-
 
 public class DaoUser {
 
@@ -78,4 +76,3 @@ public class DaoUser {
         });
     }
 }
-

@@ -132,8 +132,6 @@
         </c:choose>
     </c:forEach>
     <hr>
-
-
     <button class="btn btn-primary" name="admin" onclick='location.href="admin-view"'>назад</button>
 </div>
 </body>
