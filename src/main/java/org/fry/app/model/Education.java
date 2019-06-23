@@ -1,4 +1,4 @@
-package model;
+package org.fry.app.model;
 
 public enum Education {
 

@@ -1,4 +1,4 @@
-package dao;
+package org.fry.app.dao;
 
 import model.User;
 import util.Connector;

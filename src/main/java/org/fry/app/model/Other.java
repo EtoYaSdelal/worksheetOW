@@ -1,4 +1,4 @@
-package model;
+package org.fry.app.model;
 
 public enum Other {
     OPENDAY("Я планирую прийти на день открытых дверей и послушать презентацию Школы"),

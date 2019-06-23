@@ -1,4 +1,4 @@
-package web;
+package org.fry.app.servlet;
 
 import dao.Dao;
 import model.About;

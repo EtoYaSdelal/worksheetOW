@@ -1,4 +1,4 @@
-package model;
+package org.fry.app.model;
 
 import java.time.LocalDate;
 import java.util.EnumMap;

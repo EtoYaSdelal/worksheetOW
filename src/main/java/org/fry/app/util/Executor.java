@@ -1,4 +1,4 @@
-package util;
+package org.fry.app.util;
 
 import java.sql.PreparedStatement;
 import java.sql.SQLException;

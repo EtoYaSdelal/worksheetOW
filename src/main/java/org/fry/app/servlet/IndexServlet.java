@@ -1,4 +1,4 @@
-package web;
+package org.fry.app.servlet;
 
 import javax.servlet.ServletConfig;
 import javax.servlet.ServletException;
